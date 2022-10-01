@@ -1,23 +1,46 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+
+function User(props) {
+  const squareStyle = {
+    width: "100px",
+    height: "100px",
+    border: "1px solid green",
+    borderRadius: "10px",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  };
+  return (
+    <div style={squareStyle}>
+      <div>{props.user.age}살 - </div>
+      <div>{props.user.name}</div>
+    </div>
+  );
+}
 
 function App() {
+  const style = {
+    padding: "100px",
+    display: "flex",
+    gap: "12px",
+  };
+
+  const users = [
+    { id: 1, age: 30, name: "송중기" },
+    { id: 2, age: 24, name: "송강" },
+    { id: 3, age: 21, name: "김유정" },
+    { id: 4, age: 29, name: "구교환" },
+  ];
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div style={style}>
+      {users.map((user) => {
+        if (user.age < 25) {
+          return <User user={user} key={user.id} />;
+        } else {
+          return null;
+        }
+      })}
     </div>
   );
 }
